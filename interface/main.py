@@ -3,8 +3,8 @@ from tkinter import ttk, messagebox
 import subprocess
 import os
 
+# Ejecuta el scraping según la opción seleccionada.
 def ejecutar_scraping():
-    """Ejecuta el scraping según la opción seleccionada."""
     opcion_tipo = tipo_var.get()
     
     # Validar la cantidad de artículos

@@ -6,8 +6,8 @@ import time
 import sys
 import pandas as pd
 
+# Descarga el código HTML de una página web.
 def descargar_html(url):
-    """Descarga el código HTML de una página web."""
     response = requests.get(url)
     if response.status_code == 200:
         return response.text
@@ -15,12 +15,12 @@ def descargar_html(url):
         print(f"Error al descargar la página: {response.status_code}")
         return None
 
+# Limpia espacios extra, saltos de línea y caracteres especiales.
 def limpiar_texto(texto):
-    """Limpia espacios extra, saltos de línea y caracteres especiales."""
     return " ".join(texto.split()).strip()
 
+# impia la lista de autores eliminando duplicados, números y espacios extra.
 def limpiar_autores(lista_autores):
-    """Limpia la lista de autores eliminando duplicados, números y espacios extra."""
     autores_limpios = set()
     for autor in lista_autores:
         autor = limpiar_texto(autor)
@@ -29,8 +29,8 @@ def limpiar_autores(lista_autores):
         autores_limpios.add(autor)
     return ", ".join(sorted(autores_limpios))  # Ordenamos para evitar desorden en el CSV
 
+# "Corrige" porque no funcionaaa la URL del DOI eliminando barras extra
 def corregir_doi(doi):
-    """Corrige la URL del DOI eliminando barras extra."""
     return doi.replace("https:///", "https://").replace("//pubmed", "/pubmed")
 
 def extraer_articulos_pubmed(termino_busqueda, max_articulos):
@@ -63,8 +63,8 @@ def extraer_articulos_pubmed(termino_busqueda, max_articulos):
     
     return articulos[:max_articulos]
 
+# Extrae autores, resumen y fecha de publicación desde un artículo de PubMed.
 def extraer_detalles_articulo(url):
-    """Extrae autores, resumen y fecha de publicación desde un artículo de PubMed."""
     html = descargar_html(url)
     if not html:
         return None
@@ -93,8 +93,8 @@ def extraer_detalles_articulo(url):
     except:
         return None
 
+# Guarda los datos en un archivo CSV evitando duplicados y limpiando el formato.
 def guardar_en_csv(nombre_archivo, datos):
-    """Guarda los datos en un archivo CSV evitando duplicados y limpiando el formato."""
     ruta_directorio = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'data')
     os.makedirs(ruta_directorio, exist_ok=True)
     ruta_archivo = os.path.join(ruta_directorio, nombre_archivo)

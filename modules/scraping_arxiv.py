@@ -6,8 +6,8 @@ import time
 import sys
 import pandas as pd
 
+# Descarga el código HTML de una página web.
 def descargar_html(url):
-    """Descarga el código HTML de una página web."""
     response = requests.get(url)
     if response.status_code == 200:
         return response.text
@@ -15,8 +15,8 @@ def descargar_html(url):
         print(f"Error al descargar la página: {response.status_code}")
         return None
 
+# Extrae los títulos y enlaces de los artículos de arXiv.
 def extraer_articulos_arxiv(url_base, seccion, max_articulos):
-    """Extrae títulos y enlaces de los artículos desde múltiples páginas de arXiv."""
     articulos = []
     pagina = 0
     
@@ -45,8 +45,8 @@ def extraer_articulos_arxiv(url_base, seccion, max_articulos):
     
     return articulos[:max_articulos]
 
+# Extrae DOI, autores, resumen y fecha de publicación desde arXiv.
 def extraer_detalles_articulo(url, seccion):
-    """Extrae DOI, autores, resumen y fecha de publicación desde arXiv."""
     html = descargar_html(url)
     if not html:
         return None
@@ -63,8 +63,8 @@ def extraer_detalles_articulo(url, seccion):
     except:
         return None
 
+# Guarda los datos en un archivo CSV evitando duplicados.
 def guardar_en_csv(nombre_archivo, datos):
-    """Guarda los datos en un archivo CSV evitando duplicados."""
     ruta_directorio = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'data')
     os.makedirs(ruta_directorio, exist_ok=True)  # Crear la carpeta si no existe
     ruta_archivo = os.path.join(ruta_directorio, nombre_archivo)
