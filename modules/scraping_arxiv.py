@@ -1,3 +1,4 @@
+# Módulo para extraer artículos de arXiv y guardarlos en un archivo CSV.
 import requests
 from bs4 import BeautifulSoup
 import csv
