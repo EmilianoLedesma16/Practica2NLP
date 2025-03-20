@@ -1,4 +1,3 @@
-#Scraping de arXiv con Python
 import requests
 from bs4 import BeautifulSoup
 import csv
@@ -106,7 +105,7 @@ def guardar_en_csv(nombre_archivo, datos, total_articulos):
     # Guardar CSV sin comillas innecesarias
     df_final.to_csv(ruta_archivo, sep='\t', index=False, encoding='utf-8', quoting=csv.QUOTE_NONE, escapechar='\\')
     
-    print(f" Se han guardado {len(df_final)} artículos en {ruta_archivo}")
+    print(f"✅ Se han guardado {len(df_final)} artículos en {ruta_archivo}")
 
 # Iniciar el cronómetro antes de comenzar la ejecución
 inicio_tiempo = time.time()
@@ -146,7 +145,7 @@ else:
 # Extraer artículos nuevos
 url_arxiv = f"https://arxiv.org/list/{codigo_seccion}/recent"
 articulos = extraer_articulos_arxiv(url_arxiv, tipo_seccion, cantidad_articulos, existentes)
-print(f" Extraídos {len(articulos)} artículos de {tipo_seccion}")
+print(f"✅ Extraídos {len(articulos)} artículos de {tipo_seccion}")
 
 datos_arxiv = []
 for i, (titulo, link, seccion) in enumerate(articulos, 1):
@@ -161,6 +160,6 @@ guardar_en_csv(nombre_csv, datos_arxiv, len(existentes) + cantidad_articulos)
 # Detener el cronómetro y calcular el tiempo total
 fin_tiempo = time.time()
 tiempo_total = fin_tiempo - inicio_tiempo
-print(f" Tiempo total de ejecución: {tiempo_total:.2f} segundos")
-print(" Datos guardados en data/arxiv_raw_corpus.csv\n")
+print(f"⏳ Tiempo total de ejecución: {tiempo_total:.2f} segundos")
+print("✅ Datos guardados en data/arxiv_raw_corpus.csv")
 # Fin del código
