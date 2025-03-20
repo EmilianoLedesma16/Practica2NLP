@@ -27,14 +27,9 @@ def ejecutar_scraping():
         messagebox.showinfo("Éxito", f"Scraping completado: {cantidad} artículos descargados en data/arxiv_raw_corpus.csv")
     
     elif opcion_tipo == "PubMed":
-        termino_busqueda = pubmed_var.get().strip()
-        if not termino_busqueda:
-            messagebox.showerror("Error", "Por favor, ingresa un término de búsqueda para PubMed")
-            return
-        
         script_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "modules", "scraping_pubmed.py")
-        subprocess.run(["python", script_path, termino_busqueda, str(cantidad)])
-        messagebox.showinfo("Éxito", f"Scraping completado: {cantidad} artículos descargados en data/pubmed_raw_corpus.csv")
+        subprocess.run(["python", script_path, str(cantidad)])
+        messagebox.showinfo("Éxito", f"Scraping completado: {cantidad} artículos descargados en data/pubmed_trending.csv")
 
 def actualizar_interfaz():
     """Muestra los campos correctos según la fuente seleccionada."""
@@ -67,10 +62,6 @@ frame_arxiv.pack(pady=5)
 
 # Sección para PubMed (Oculta por defecto)
 frame_pubmed = tk.Frame(root)
-tk.Label(frame_pubmed, text="Término de búsqueda en PubMed:").pack()
-pubmed_var = tk.StringVar()
-pubmed_entry = tk.Entry(frame_pubmed, textvariable=pubmed_var)
-pubmed_entry.pack()
 frame_pubmed.pack_forget()
 
 # Número de artículos

@@ -128,4 +128,3 @@ fin_tiempo = time.time()
 tiempo_total = fin_tiempo - inicio_tiempo
 print(f"⏳ Tiempo total de ejecución: {tiempo_total:.2f} segundos")
 print("✅ Datos guardados en data/arxiv_raw_corpus.csv")
-print("✅ Omi es gay y el Rodas es puto\n")
