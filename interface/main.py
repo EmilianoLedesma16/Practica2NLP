@@ -36,6 +36,14 @@ def ejecutar_scraping():
         script_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "modules", "scraping_pubmed.py")
         subprocess.run(["python", script_path, termino_busqueda, str(cantidad)])
         messagebox.showinfo("Éxito", f"Scraping completado: {cantidad} artículos descargados en data/pubmed_raw_corpus.csv")
+        
+def ejecutar_normalizacion():
+    try:
+        script_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "modules", "normalizacion_texto.py")
+        subprocess.run(["python", script_path])
+        messagebox.showinfo("Éxito", "Normalización de texto completada y archivo generado")
+    except Exception as e:
+        messagebox.showerror("Error", f"Error al normalizar el texto: {e}")
 
 def actualizar_interfaz():
     """Muestra los campos correctos según la fuente seleccionada y actualiza el rango de artículos."""
@@ -93,6 +101,8 @@ cantidad_entry = tk.Entry(frame_form, textvariable=cantidad_var)
 
 # Botón para ejecutar scraping (siempre debajo)
 btn_ejecutar = tk.Button(root, text="Iniciar Scraping", command=ejecutar_scraping)
+btn_normalizar = tk.Button(root, text="Normalizar Texto", command=ejecutar_normalizacion)
+btn_normalizar.pack(pady=10)
 
 # Cargar la interfaz inicial
 actualizar_interfaz()
