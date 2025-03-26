@@ -123,7 +123,7 @@ def guardar_csv(nombre_archivo, datos, existentes):
     os.makedirs(ruta_directorio, exist_ok=True)
     ruta_archivo = os.path.join(ruta_directorio, nombre_archivo)
 
-    columnas = ['DOI', 'Title', 'Authors', 'Journal', 'Abstract', 'Publication Date']
+    columnas = ['DOI', 'Title', 'Authors', 'Abstract', 'Journal', 'Date']
 
     # Leer datos existentes del archivo CSV
     if os.path.exists(ruta_archivo):
@@ -162,7 +162,7 @@ def parsear_nbib(nbib_content):
     journal = obtener_journal(nbib_content)
     abstract = obtener_abstract(nbib_content)
     publication_date = obtener_publication_date(nbib_content)
-    return [doi, title, authors, journal, abstract, publication_date]
+    return [doi, title, authors, abstract, journal, publication_date]
 
 if __name__ == "__main__":
     max_articulos = int(sys.argv[1]) if len(sys.argv) > 1 else 10
