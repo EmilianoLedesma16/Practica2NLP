@@ -3,7 +3,6 @@ import time
 import requests
 import re
 from bs4 import BeautifulSoup
-from tqdm import tqdm
 import csv
 import pandas as pd
 import os
