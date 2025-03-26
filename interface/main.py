@@ -45,6 +45,16 @@ def ejecutar_normalizacion():
     except Exception as e:
         messagebox.showerror("Error", f"Error al normalizar el texto: {e}")
 
+def ejecutar_vectorizacion():
+    try:
+        # Llamamos al script de vectorización
+        script_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "modules", "vectorizacion_texto.py")
+        subprocess.run(["python", script_path])
+        messagebox.showinfo("Éxito", "Representación vectorial completada y archivos generados")
+    except Exception as e:
+        messagebox.showerror("Error", f"Error al generar la representación vectorial: {e}")
+
+
 def actualizar_interfaz():
     """Muestra los campos correctos según la fuente seleccionada y actualiza el rango de artículos."""
     for widget in frame_form.winfo_children():
@@ -103,6 +113,8 @@ cantidad_entry = tk.Entry(frame_form, textvariable=cantidad_var)
 btn_ejecutar = tk.Button(root, text="Iniciar Scraping", command=ejecutar_scraping)
 btn_normalizar = tk.Button(root, text="Normalizar Texto", command=ejecutar_normalizacion)
 btn_normalizar.pack(pady=10)
+btn_vectorizar = tk.Button(root, text="Vectorizar Texto", command=ejecutar_vectorizacion)
+btn_vectorizar.pack(pady=10)
 
 # Cargar la interfaz inicial
 actualizar_interfaz()
