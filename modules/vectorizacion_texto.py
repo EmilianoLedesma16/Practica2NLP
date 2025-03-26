@@ -10,13 +10,13 @@ ruta_base = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'data'
 df_arxiv = pd.read_csv(os.path.join(ruta_base, 'arxiv_clean_corpus.csv'), sep='\t', encoding='utf-8-sig')
 
 # Crear un vectorizador binario
-vectorizador_binario = CountVectorizer(binary=True)
+vectorizador_binario = CountVectorizer(binary=True, ngram_range=(1, 2))
 
 # Crear un vectorizador TF (Term Frequency)
-vectorizador_tf = CountVectorizer()
+vectorizador_tf = CountVectorizer(ngram_range=(1, 2))
 
 # Crear un vectorizador TF-IDF
-vectorizador_tfidf = TfidfVectorizer()
+vectorizador_tfidf = TfidfVectorizer(ngram_range=(1, 2))
 
 # Función para generar y guardar las representaciones
 def generar_y_guardar_vectorizacion(textos, nombre_archivo):
