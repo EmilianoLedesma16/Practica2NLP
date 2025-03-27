@@ -3,14 +3,13 @@ from tkinter import ttk, messagebox
 import subprocess
 import os
 
-# Ejecuta el scraping según la opción seleccionada.
+top_windows = {"normalizar": None, "vectorizar": None}
+
 def ejecutar_scraping():
     opcion_tipo = tipo_var.get()
-    
-    # Validar la cantidad de artículos
     try:
         cantidad = int(cantidad_var.get())
-        rango_max = 150 if opcion_tipo == "arXiv" else 300  # Ajustar el límite según la fuente
+        rango_max = 150 if opcion_tipo == "arXiv" else 300
         if not (1 <= cantidad <= rango_max):
             raise ValueError
     except ValueError:
@@ -22,50 +21,50 @@ def ejecutar_scraping():
         if opcion_seccion not in ["Computation and Language", "Computer Vision"]:
             messagebox.showerror("Error", "Por favor, selecciona una sección válida de arXiv")
             return
-        
-        script_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "modules", "scraping_arxiv.py")
+        script_path = os.path.join("modules", "scraping_arxiv.py")
         subprocess.run(["python", script_path, opcion_seccion, str(cantidad)])
-        messagebox.showinfo("Éxito", f"Scraping completado: {cantidad} artículos descargados en data/arxiv_raw_corpus.csv")
     
     elif opcion_tipo == "PubMed":
         termino_busqueda = pubmed_var.get().strip()
         if not termino_busqueda:
             messagebox.showerror("Error", "Por favor, ingresa un término de búsqueda para PubMed")
             return
-        
-        script_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "modules", "scraping_pubmed.py")
+        script_path = os.path.join("modules", "scraping_pubmed.py")
         subprocess.run(["python", script_path, termino_busqueda, str(cantidad)])
-        messagebox.showinfo("Éxito", f"Scraping completado: {cantidad} artículos descargados en data/pubmed_raw_corpus.csv")
-        
-def ejecutar_normalizacion():
-    try:
-        script_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "modules", "normalizacion_texto.py")
-        subprocess.run(["python", script_path])
-        messagebox.showinfo("Éxito", "Normalización de texto completada y archivo generado")
-    except Exception as e:
-        messagebox.showerror("Error", f"Error al normalizar el texto: {e}")
 
-def ejecutar_vectorizacion():
-    try:
-        # Llamamos al script de vectorización
-        script_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "modules", "vectorizacion_texto.py")
-        subprocess.run(["python", script_path])
-        messagebox.showinfo("Éxito", "Representación vectorial completada y archivos generados")
-    except Exception as e:
-        messagebox.showerror("Error", f"Error al generar la representación vectorial: {e}")
-
+def abrir_ventana_proceso(proceso):
+    if top_windows[proceso] and tk.Toplevel.winfo_exists(top_windows[proceso]):
+        return
+    
+    def iniciar_proceso():
+        seleccion = tipo_var_proceso.get()
+        if not seleccion:
+            messagebox.showerror("Error", "Por favor, selecciona una opción")
+            return
+        script_name = "normalizacion_texto.py" if proceso == "normalizar" else "vectorizacion_texto.py"
+        script_path = os.path.join("modules", script_name)
+        subprocess.run(["python", script_path, seleccion])
+        messagebox.showinfo("Éxito", f"{proceso.capitalize()} completado para {seleccion}")
+        ventana.destroy()
+        top_windows[proceso] = None
+    
+    ventana = tk.Toplevel(root)
+    top_windows[proceso] = ventana
+    ventana.title(f"{proceso.capitalize()} Texto")
+    ventana.geometry("300x200")
+    tipo_var_proceso = tk.StringVar()
+    
+    ttk.Label(ventana, text="Selecciona la fuente de datos:").pack(pady=10)
+    ttk.Radiobutton(ventana, text="arXiv", variable=tipo_var_proceso, value="arXiv").pack()
+    ttk.Radiobutton(ventana, text="PubMed", variable=tipo_var_proceso, value="PubMed").pack()
+    ttk.Button(ventana, text="Iniciar", command=iniciar_proceso).pack(pady=20)
 
 def actualizar_interfaz():
-    """Muestra los campos correctos según la fuente seleccionada y actualiza el rango de artículos."""
     for widget in frame_form.winfo_children():
-        widget.pack_forget()  # Oculta todos los elementos antes de actualizar
-
-    # Título
+        widget.pack_forget()
     tk.Label(frame_form, text="Selecciona el tipo de scraping:").pack()
     tk.Radiobutton(frame_form, text="arXiv", variable=tipo_var, value="arXiv", command=actualizar_interfaz).pack()
     tk.Radiobutton(frame_form, text="PubMed", variable=tipo_var, value="PubMed", command=actualizar_interfaz).pack()
-    
-    # Sección específica de la fuente
     if tipo_var.get() == "arXiv":
         tk.Label(frame_form, text="Selecciona la sección de arXiv:").pack()
         seccion_menu.pack()
@@ -74,49 +73,42 @@ def actualizar_interfaz():
         tk.Label(frame_form, text="Término de búsqueda en PubMed:").pack()
         pubmed_entry.pack()
         cantidad_label_var.set("Número de artículos (1-300):")
-    
-    # Campo de cantidad de artículos
     cantidad_label.pack()
     cantidad_entry.pack()
-
-    # Botón de ejecución siempre debajo de los campos visibles
     btn_ejecutar.pack(pady=10)
 
-# Configurar ventana principal
 root = tk.Tk()
 root.title("Scraping de Artículos Científicos")
 root.geometry("400x350")
 
-# Frame principal para los campos de entrada
 frame_form = tk.Frame(root)
 frame_form.pack(pady=10)
 
-# Variables
 tipo_var = tk.StringVar(value="arXiv")
 seccion_var = tk.StringVar()
 pubmed_var = tk.StringVar()
 cantidad_var = tk.StringVar()
 cantidad_label_var = tk.StringVar(value="Número de artículos (1-150):")
 
-# Dropdown de secciones de arXiv
 seccion_menu = ttk.Combobox(frame_form, textvariable=seccion_var, state="readonly")
 seccion_menu["values"] = ("Computation and Language", "Computer Vision")
 
-# Entrada de texto para PubMed
 pubmed_entry = tk.Entry(frame_form, textvariable=pubmed_var)
 
-# Campo de cantidad de artículos
 cantidad_label = tk.Label(frame_form, textvariable=cantidad_label_var)
 cantidad_entry = tk.Entry(frame_form, textvariable=cantidad_var)
 
-# Botón para ejecutar scraping (siempre debajo)
 btn_ejecutar = tk.Button(root, text="Iniciar Scraping", command=ejecutar_scraping)
-btn_normalizar = tk.Button(root, text="Normalizar Texto", command=ejecutar_normalizacion)
-btn_normalizar.pack(pady=10)
-btn_vectorizar = tk.Button(root, text="Vectorizar Texto", command=ejecutar_vectorizacion)
-btn_vectorizar.pack(pady=10)
+btn_ejecutar.pack(pady=10)
 
-# Cargar la interfaz inicial
+frame_botones = tk.Frame(root)
+frame_botones.pack()
+
+btn_normalizar = tk.Button(frame_botones, text="Normalizar Texto", command=lambda: abrir_ventana_proceso("normalizar"))
+btn_normalizar.grid(row=0, column=0, padx=10, pady=10)
+
+btn_vectorizar = tk.Button(frame_botones, text="Vectorizar Texto", command=lambda: abrir_ventana_proceso("vectorizar"))
+btn_vectorizar.grid(row=0, column=1, padx=10, pady=10)
+
 actualizar_interfaz()
-
 root.mainloop()
