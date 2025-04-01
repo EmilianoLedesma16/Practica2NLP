@@ -4,3 +4,4 @@ pandas
 spaCy
 scikit-learn
 customtkinter
+nltk
