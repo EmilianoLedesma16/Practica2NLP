@@ -163,8 +163,7 @@ def parsear_nbib(nbib_content):
     publication_date = obtener_publication_date(nbib_content)
     return [doi, title, authors, abstract, journal, publication_date]
 
-if __name__ == "__main__":
-    max_articulos = int(sys.argv[1]) if len(sys.argv) > 1 else 10
+def scrape_pubmed(max_articulos):
     inicio_tiempo = time.time()
 
     # Leer artículos existentes
@@ -207,3 +206,6 @@ if __name__ == "__main__":
     guardar_csv(nombre_csv, datos_pubmed, existentes)
 
     print(f"ℹ️ Tiempo total de ejecución: {time.time() - inicio_tiempo:.2f} segundos.")
+
+if __name__ == "__main__":
+    scrape_pubmed()
