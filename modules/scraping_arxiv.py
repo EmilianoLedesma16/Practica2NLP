@@ -38,7 +38,7 @@ def extraer_articulos_arxiv(url_base, seccion, cantidad_nuevos, existentes):
         dt_tags = soup.find_all('dt')
 
         if not dt_tags:
-            print("⚠️ No se encontraron más artículos en arXiv.")
+            print("No se encontraron más artículos en arXiv.")
             break
 
         for dt in dt_tags:
