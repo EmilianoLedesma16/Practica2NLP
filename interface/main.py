@@ -7,16 +7,11 @@ from tabs.search_tab import create_search_tab
 
 # Agregar el directorio raíz del proyecto al PYTHONPATH
 root_path = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-print(f"Directorio raíz del proyecto: {root_path}")
 sys.path.append(root_path)
 
 # Agregar la carpeta "modules" directamente al PYTHONPATH
 modules_path = os.path.join(root_path, "modules")
 sys.path.append(modules_path)
-
-print("Rutas en sys.path:")
-for path in sys.path:
-    print(path)
 
 def main():
     app = ctk.CTk()

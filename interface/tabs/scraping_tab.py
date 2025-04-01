@@ -13,10 +13,6 @@ sys.path.append(modules_path)
 from modules.scraping_arxiv import scrape_arxiv
 from modules.scraping_pubmed import scrape_pubmed
 
-print("Rutas en sys.path desde scraping_tab:")
-for path in sys.path:
-    print(path)
-
 def ejecutar_scraping(opcion, seccion, num_articulos):
     try:
         # Convertir el número de artículos a entero
