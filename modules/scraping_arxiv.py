@@ -131,73 +131,69 @@ def guardar_en_csv(nombre_archivo, datos, existentes):
 
     print(f"✅ Se han guardado {len(df_nuevos)} artículos nuevos en {ruta_archivo}")
 
-# Iniciar el cronómetro antes de comenzar la ejecución
-inicio_tiempo = time.time()
+def scrape_arxiv(tipo_seccion, cantidad_articulos):
+    # Iniciar el cronómetro antes de comenzar la ejecución
+    inicio_tiempo = time.time()
 
-# Leer parámetros de la interfaz
-try:
-    tipo_seccion = sys.argv[1]
-    cantidad_articulos = int(sys.argv[2])
-except (IndexError, ValueError):
-    print("Uso: python script.py 'Nombre de Sección' cantidad_artículos")
-    sys.exit(1)
+    # Diccionario para mapear la selección del usuario a las claves de arXiv
+    secciones_arxiv = {
+        "Computation and Language": "cs.CL",
+        "Computer Vision": "cs.CV"
+    }
 
-# Diccionario para mapear la selección del usuario a las claves de arXiv
-secciones_arxiv = {
-    "Computation and Language": "cs.CL",
-    "Computer Vision": "cs.CV"
-}
+    codigo_seccion = secciones_arxiv.get(tipo_seccion)
+    if not codigo_seccion:
+        print("Error: Sección no válida.")
+        return
 
-codigo_seccion = secciones_arxiv.get(tipo_seccion)
-if not codigo_seccion:
-    print("Error: Sección no válida.")
-    sys.exit(1)
+    # Leer artículos existentes
+    nombre_csv = 'arxiv_raw_corpus.csv'
+    ruta_archivo = os.path.abspath(os.path.join("..", "data", nombre_csv))
 
-# Leer artículos existentes
-nombre_csv = 'arxiv_raw_corpus.csv'
-ruta_archivo = os.path.abspath(os.path.join("..", "data", nombre_csv))
-
-if os.path.exists(ruta_archivo):
-    try:
-        if os.stat(ruta_archivo).st_size == 0:
-            print("El archivo CSV está vacío. Se eliminará.")
-            os.remove(ruta_archivo)
+    if os.path.exists(ruta_archivo):
+        try:
+            if os.stat(ruta_archivo).st_size == 0:
+                print("El archivo CSV está vacío. Se eliminará.")
+                os.remove(ruta_archivo)
+                existentes = set()
+            else:
+                df_existente = pd.read_csv(ruta_archivo, sep=',', encoding='utf-8-sig')
+                print(f"Contenido del archivo CSV:\n{df_existente}")
+                existentes = set(df_existente['DOI'].tolist())
+                print(f"DOIs existentes cargados: {existentes}")
+        except (pd.errors.EmptyDataError, FileNotFoundError):
+            print("Error al leer el archivo CSV. Se inicializará vacío.")
             existentes = set()
-        else:
-            df_existente = pd.read_csv(ruta_archivo, sep=',', encoding='utf-8-sig')
-            print(f"Contenido del archivo CSV:\n{df_existente}")
-            existentes = set(df_existente['DOI'].tolist())
-            print(f"DOIs existentes cargados: {existentes}")
-    except (pd.errors.EmptyDataError, FileNotFoundError):
-        print("Error al leer el archivo CSV. Se inicializará vacío.")
-        existentes = set()
-else:
-    print("El archivo CSV no existe. Se inicializará vacío.")
-    existentes = set()
-
-# Extraer artículos nuevos
-url_arxiv = f"https://arxiv.org/list/{codigo_seccion}/recent"
-articulos = extraer_articulos_arxiv(url_arxiv, tipo_seccion, cantidad_articulos, existentes)
-print(f"- Extraídos {len(articulos)} artículos de {tipo_seccion}")
-
-datos_arxiv = []
-for i, (titulo, link, seccion) in enumerate(articulos, 1):
-    detalles = extraer_detalles_articulo(link, seccion)
-    if detalles:
-        print(f"Detalles extraídos correctamente: {detalles}")
-        datos_arxiv.append(detalles)
     else:
-        print(f"Error al extraer detalles del artículo: {link}")
-    time.sleep(0.5)
+        print("El archivo CSV no existe. Se inicializará vacío.")
+        existentes = set()
 
-print(f"DOIs existentes en el archivo: {existentes}")
-print(f"DOIs extraídos: {[row[0] for row in datos_arxiv]}")
+    # Extraer artículos nuevos
+    url_arxiv = f"https://arxiv.org/list/{codigo_seccion}/recent"
+    articulos = extraer_articulos_arxiv(url_arxiv, tipo_seccion, cantidad_articulos, existentes)
+    print(f"- Extraídos {len(articulos)} artículos de {tipo_seccion}")
 
-# Guardar en CSV manteniendo el número total de artículos
-guardar_en_csv(nombre_csv, datos_arxiv, existentes)
+    datos_arxiv = []
+    for i, (titulo, link, seccion) in enumerate(articulos, 1):
+        detalles = extraer_detalles_articulo(link, seccion)
+        if detalles:
+            print(f"Detalles extraídos correctamente: {detalles}")
+            datos_arxiv.append(detalles)
+        else:
+            print(f"Error al extraer detalles del artículo: {link}")
+        time.sleep(0.5)
 
-# Detener el cronómetro y calcular el tiempo total
-fin_tiempo = time.time()
-tiempo_total = fin_tiempo - inicio_tiempo
-print(f"⏳ Tiempo total de ejecución: {tiempo_total:.2f} segundos")
-print("✅ Datos guardados en data/arxiv_raw_corpus.csv")
+    print(f"DOIs existentes en el archivo: {existentes}")
+    print(f"DOIs extraídos: {[row[0] for row in datos_arxiv]}")
+
+    # Guardar en CSV manteniendo el número total de artículos
+    guardar_en_csv(nombre_csv, datos_arxiv, existentes)
+
+    # Detener el cronómetro y calcular el tiempo total
+    fin_tiempo = time.time()
+    tiempo_total = fin_tiempo - inicio_tiempo
+    print(f"⏳ Tiempo total de ejecución: {tiempo_total:.2f} segundos")
+    print("✅ Datos guardados en data/arxiv_raw_corpus.csv")
+
+if __name__ == "__main__":
+    scrape_arxiv()
