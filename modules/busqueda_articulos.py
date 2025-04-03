@@ -3,6 +3,15 @@ from modules.normalizacion_texto import normalizar_texto
 import pickle
 import os
 from sklearn.metrics.pairwise import cosine_similarity
+import pandas as pd
+
+vectorizadores = {
+        "Binario" : "binaria",
+        "Frecuencia" : "tf",
+        "TF-IDF" : "tfidf",
+        "Bigramas" : "bi",
+        "Unigramas" : "uni"
+    }
 
 def obtener_ruta_raiz():
     # __file__ es la ruta del archivo actual
@@ -11,17 +20,9 @@ def obtener_ruta_raiz():
     ruta_raiz = os.path.abspath(os.path.join(ruta_actual, "..", ".."))
     return ruta_raiz
 
-def vectorizar_texto(texto, ngrama, vectorizacion):
-    
-    root_path = obtener_ruta_raiz()
+root_path = obtener_ruta_raiz()
 
-    vectorizadores = {
-        "Binario" : "binaria",
-        "Frecuencia" : "tf",
-        "TF-IDF" : "tfidf",
-        "Bigramas" : "bi",
-        "Unigramas" : "uni"
-    }
+def vectorizar_texto(texto, ngrama, vectorizacion):
 
     vectorizador_pubmed_path = f"{root_path}/data/plks/vectorizadores/pubmed/pubmed_vector_{vectorizadores[vectorizacion]}_{vectorizadores[ngrama]}_vect.pkl"
     vectorizador_arxiv_path = f"{root_path}/data/plks/vectorizadores/arxiv/arxiv_vector_{vectorizadores[vectorizacion]}_{vectorizadores[ngrama]}_vect.pkl"
@@ -40,10 +41,12 @@ def vectorizar_texto(texto, ngrama, vectorizacion):
         print(f"El vectorizador de arXiv no se encontró en la ruta: {vectorizador_arxiv_path}")
         return None
 
-    matriz_vectorizada_pubmed = vectorizador_pubmed.transform([texto])
-    matriz_vectorizada_arxiv = vectorizador_arxiv.transform([texto])
+    matrices = [None, None]
+
+    matrices[0] = vectorizador_pubmed.transform([texto])
+    matrices[1] = vectorizador_arxiv.transform([texto])
     
-    similitudes_pubmed = cosine_similarity(matriz_vectorizada_pubmed)
+    return matrices
 
 def cargar_archivo_referencia(ruta_archivo, referencia):
 
@@ -112,13 +115,59 @@ def procesar_bib(ruta_archivo, referencia):
     elif referencia == "Abstract":
         return resumen
 
+
 def buscar_articulos(nombre_archivo, ngrama, vectorizacion, referencia):
+    
+    matriz_pubmed_path = f"{root_path}/data/plks/matrices/pubmed/pubmed_vector_{vectorizadores[vectorizacion]}_{vectorizadores[ngrama]}.pkl"
+    matriz_arxiv_path = f"{root_path}/data/plks/matrices/arxiv/arxiv_vector_{vectorizadores[vectorizacion]}_{vectorizadores[ngrama]}.pkl"
+
+    pubmed_csv_path = f"{root_path}/data/pubmed_raw_corpus.csv"
+    arxiv_csv_path = f"{root_path}/data/arxiv_raw_corpus.csv"
+
+    try:
+        pubmed_data = pd.read_csv(pubmed_csv_path)
+        arxiv_data = pd.read_csv(arxiv_csv_path)
+    except FileNotFoundError as e:
+        print(f"No se pudo cargar el archivo CSV: {e}")
+        return None, None
+
+    try:
+        with open(matriz_pubmed_path, 'rb') as file:
+            matriz_pubmed = pickle.load(file)
+    except FileNotFoundError:
+        print(f"La matriz de PubMed no se encontró en la ruta: {matriz_pubmed_path}")
+        return None, None
+
+    try:
+        with open(matriz_arxiv_path, 'rb') as file:
+            matriz_arxiv = pickle.load(file)
+    except FileNotFoundError:
+        print(f"La matriz de arXiv no se encontró en la ruta: {matriz_arxiv_path}")
+        return None, None
+
+    titulos_pubmed = pubmed_data["Title"].tolist()
+    titulos_arxiv = arxiv_data["Title"].tolist()
 
     texto = cargar_archivo_referencia(nombre_archivo, referencia)
+    if not texto:
+        print("No se pudo extraer texto del archivo seleccionado.")
+        return None, None
+
     texto_normalizado = normalizar_texto(texto)
 
-    # Vectorizar el texto normalizado
     matriz_vectorizada = vectorizar_texto(texto_normalizado, ngrama, vectorizacion)
+    if matriz_vectorizada is None:
+        print("No se pudo vectorizar el texto.")
+        return None, None
 
+    similitudes_pubmed = cosine_similarity(matriz_vectorizada[0], matriz_pubmed)
+    similitudes_arxiv = cosine_similarity(matriz_vectorizada[1], matriz_arxiv)
 
+    resultados_pubmed = sorted(enumerate(similitudes_pubmed[0]), key=lambda x: x[1], reverse=True)
+    resultados_arxiv = sorted(enumerate(similitudes_arxiv[0]), key=lambda x: x[1], reverse=True)
 
+    # Crear listas de resultados con títulos y similitudes
+    resultados_pubmed_formateados = [(titulos_pubmed[idx], similitud) for idx, similitud in resultados_pubmed[:10]]
+    resultados_arxiv_formateados = [(titulos_arxiv[idx], similitud) for idx, similitud in resultados_arxiv[:10]]
+
+    return resultados_pubmed_formateados, resultados_arxiv_formateados
