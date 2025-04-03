@@ -89,7 +89,7 @@ def normalizar_texto(texto, eliminar_redundancias_flag=True):
             continue
         
         #Eliminar stopwords según la categoría gramatical
-        if token.is_stop and token.pos_ in CATEGORIAS_STOP_POS:
+        if token.pos_ in CATEGORIAS_STOP_POS:
             continue 
 
         # Conservar tecnicismos protegidos
@@ -128,10 +128,11 @@ def procesar_corpus(ruta_entrada, ruta_salida):
             raise ValueError("El archivo de entrada debe contener las columnas 'Title' y 'Abstract'.")
 
         # Combinar título y resumen en una nueva columna
-        df['Texto_Completo'] = df['Title'].fillna('') + ". " + df['Abstract'].fillna('')
+        #df['Texto_Completo'] = df['Title'].fillna('') + ". " + df['Abstract'].fillna('')
 
         # Aplicar la normalización al texto completo
-        df['Cleaned_Text'] = df['Texto_Completo'].apply(normalizar_texto)
+        df['Cleaned_Title'] = df['Title'].fillna('').apply(normalizar_texto)
+        df['Cleaned_Abstract'] = df['Abstract'].fillna('').apply(normalizar_texto)
 
         # Guardar el DataFrame limpio en el archivo de salida
         df.to_csv(ruta_salida, index=False, encoding='utf-8-sig', sep='\t')
