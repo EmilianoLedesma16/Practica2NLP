@@ -5,9 +5,13 @@ import re
 import nltk
 from nltk.stem import WordNetLemmatizer
 
+# Categorías gramaticales cuya stopword se debe eliminar
+CATEGORIAS_STOP_POS = {"DET", "ADP", "CCONJ", "PRON", "AUX", "PART","INTJ", "SCONJ", "NUM"}  # Artículos, preposiciones, conjunciones, pronombres, verbos auxiliares y particles
+
+
 # Descargar recursos de NLTK
 nltk.download('wordnet')
-nltk.download('omw-1.4')  # Opcional, para soporte multilingüe
+nltk.download('omw-1.4')  # soporte multilingüe
 
 # Inicializar el lematizador de WordNet
 lemmatizer = WordNetLemmatizer()
@@ -20,6 +24,7 @@ PATRONES_ESPECIALES = [
     r'\b[A-Z]{2,}\d+[A-Z]*\b',        # KL3M, GPT4
     r'\b\d+[A-Z]{1,}\b',              # 4K, 16K
     r'\b[A-Z]+-\d+[a-zA-Z]?\b',       # GPT-4o, BPE-128k
+    r'\b[a-zA-Z]+-[a-zA-Z]+\b'        # age-associated, il6-dependent
 ]
 
 # Función para eliminar fragmentos de LaTeX
@@ -65,6 +70,9 @@ def lematizar_con_respaldo(token):
 
 # Función para normalizar texto
 def normalizar_texto(texto, eliminar_redundancias_flag=True):
+    # Asefurar que todo esté en minúsculas
+    #texto = texto.lower()
+    
     # Eliminar LaTeX
     texto = eliminar_latex(texto)
     
@@ -77,8 +85,12 @@ def normalizar_texto(texto, eliminar_redundancias_flag=True):
 
     for token in doc:
         # Ignorar puntuación, espacios y stopwords
-        if token.is_punct or token.is_space or token.is_stop:
+        if token.is_punct or token.is_space:
             continue
+        
+        #Eliminar stopwords según la categoría gramatical
+        if token.is_stop and token.pos_ in CATEGORIAS_STOP_POS:
+            continue 
 
         # Conservar tecnicismos protegidos
         if token.text in protegidos:
