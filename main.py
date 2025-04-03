@@ -1,9 +1,9 @@
 import sys
 import os
 import customtkinter as ctk
-from tabs.scraping_tab import create_scraping_tab
-from tabs.processing_tab import create_processing_tab
-from tabs.search_tab import create_search_tab
+from interface.scraping_tab import create_scraping_tab
+from interface.processing_tab import create_processing_tab
+from interface.search_tab import create_search_tab
 
 # Agregar el directorio raíz del proyecto al PYTHONPATH
 root_path = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))

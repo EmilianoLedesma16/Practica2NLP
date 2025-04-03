@@ -1,10 +1,11 @@
 import customtkinter as ctk
 from tkinter import filedialog
+from modules.busqueda_articulos import buscar_articulos  # Asegúrate de que esta función esté definida en el módulo correspondiente
 
 def cargar_archivo():
     # Abrir un cuadro de diálogo para seleccionar un archivo .ris o .bibtex
     archivo = filedialog.askopenfilename(
-        filetypes=[("Archivos RIS", "*.ris"), ("Archivos BibTeX", "*.bibtex")],
+        filetypes=[("Archivos RIS", "*.ris"), ("Archivos BibTeX", "*.bib")],
         title="Selecciona un archivo RIS o BibTeX"
     )
     if archivo:
@@ -14,16 +15,6 @@ def cargar_archivo():
         print("No se seleccionó ningún archivo.")
         return None
 
-def ejecutar_busqueda(archivo, ngrama, vectorizacion):
-    if not archivo:
-        print("Por favor, selecciona un archivo antes de continuar.")
-        return
-
-    print(f"Ejecutando búsqueda con las siguientes opciones:")
-    print(f"- Archivo: {archivo}")
-    print(f"- N-Grama: {ngrama}")
-    print(f"- Vectorización: {vectorizacion}")
-    # Aquí puedes llamar a la función que procesará el archivo y realizará la búsqueda
 
 def create_search_tab(tabview):
     tab3 = tabview.add("Búsqueda")
@@ -32,11 +23,24 @@ def create_search_tab(tabview):
     label = ctk.CTkLabel(tab3, text="Configuración de Búsqueda")
     label.pack(pady=10)
 
-    # Botón para cargar un archivo RIS o BibTeX
-    archivo_var = [None]  # Usamos una lista para almacenar el archivo seleccionado
-    def seleccionar_archivo():
-        archivo_var[0] = cargar_archivo()
+    # Variable para almacenar la ruta del archivo seleccionado
+    archivo_var = [None]  # Usamos una lista para que sea mutable
 
+    # Etiqueta para mostrar el archivo seleccionado
+    archivo_label = ctk.CTkLabel(tab3, text="Por favor selecciona un archivo", wraplength=400)
+    archivo_label.pack(pady=5)
+
+    # Función para seleccionar un archivo
+    def seleccionar_archivo():
+        archivo = cargar_archivo()
+        if archivo:
+            archivo_var[0] = archivo
+            archivo_label.configure(text=f"Archivo seleccionado: {archivo}")
+            print(archivo_var[0])
+        else:
+            archivo_label.configure(text="No se seleccionó ningún archivo.")
+
+    # Botón para cargar un archivo RIS o BibTeX
     button_cargar_archivo = ctk.CTkButton(
         tab3,
         text="Cargar Archivo RIS o BibTeX",
@@ -58,14 +62,22 @@ def create_search_tab(tabview):
     dropdown_vectorizacion = ctk.CTkOptionMenu(tab3, values=["Binario", "Frecuencia", "TF-IDF"], variable=vectorizacion_var)
     dropdown_vectorizacion.pack(pady=5)
 
+    # Menú desplegable para seleccionar la referencia (abstract o título)
+    label_referencia = ctk.CTkLabel(tab3, text="Selecciona la referencia para la comparación:")
+    label_referencia.pack(pady=5)
+    referencia_var = ctk.StringVar(value="Abstract")  # Valor por defecto
+    dropdown_referencia = ctk.CTkOptionMenu(tab3, values=["Abstract", "Title"], variable=referencia_var)
+    dropdown_referencia.pack(pady=5)
+
     # Botón para ejecutar la búsqueda
     button_buscar = ctk.CTkButton(
         tab3,
         text="Ejecutar Búsqueda",
-        command=lambda: ejecutar_busqueda(
-            archivo_var[0],  # Archivo cargado
-            ngrama_var.get(),  # Tipo de N-Grama
-            vectorizacion_var.get()  # Método de vectorización
-        )
+        command=lambda: buscar_articulos(
+        archivo_var[0],  # Archivo seleccionado
+        ngrama_var.get(),  # Tipo de N-Grama
+        vectorizacion_var.get(),  # Método de vectorización
+        referencia_var.get()  # Referencia (abstract o título)
+    )
     )
     button_buscar.pack(pady=20)
