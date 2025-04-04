@@ -10,7 +10,9 @@ vectorizadores = {
         "Frecuencia" : "tf",
         "TF-IDF" : "tfidf",
         "Bigramas" : "bi",
-        "Unigramas" : "uni"
+        "Unigramas" : "uni",
+        "Abstract" : "abstract",
+        "Title" : "titulo",
     }
 
 def obtener_ruta_raiz():
@@ -22,10 +24,10 @@ def obtener_ruta_raiz():
 
 root_path = obtener_ruta_raiz()
 
-def vectorizar_texto(texto, ngrama, vectorizacion):
+def vectorizar_texto(texto, ngrama, vectorizacion, referencia):
 
-    vectorizador_pubmed_path = f"{root_path}/data/plks/vectorizadores/pubmed/pubmed_vector_{vectorizadores[vectorizacion]}_{vectorizadores[ngrama]}_vect.pkl"
-    vectorizador_arxiv_path = f"{root_path}/data/plks/vectorizadores/arxiv/arxiv_vector_{vectorizadores[vectorizacion]}_{vectorizadores[ngrama]}_vect.pkl"
+    vectorizador_pubmed_path = f"{root_path}/data/plks/vectorizadores/pubmed/pubmed_vector_{vectorizadores[vectorizacion]}_{vectorizadores[ngrama]}_vect_{vectorizadores[referencia]}.pkl"
+    vectorizador_arxiv_path = f"{root_path}/data/plks/vectorizadores/arxiv/arxiv_vector_{vectorizadores[vectorizacion]}_{vectorizadores[ngrama]}_vect_{vectorizadores[referencia]}.pkl"
 
     try:
         with open(vectorizador_pubmed_path, 'rb') as file:
@@ -118,8 +120,8 @@ def procesar_bib(ruta_archivo, referencia):
 
 def buscar_articulos(nombre_archivo, ngrama, vectorizacion, referencia):
     
-    matriz_pubmed_path = f"{root_path}/data/plks/matrices/pubmed/pubmed_vector_{vectorizadores[vectorizacion]}_{vectorizadores[ngrama]}.pkl"
-    matriz_arxiv_path = f"{root_path}/data/plks/matrices/arxiv/arxiv_vector_{vectorizadores[vectorizacion]}_{vectorizadores[ngrama]}.pkl"
+    matriz_pubmed_path = f"{root_path}/data/plks/matrices/pubmed/pubmed_vector_{vectorizadores[vectorizacion]}_{vectorizadores[ngrama]}_{vectorizadores[referencia]}.pkl"
+    matriz_arxiv_path = f"{root_path}/data/plks/matrices/arxiv/arxiv_vector_{vectorizadores[vectorizacion]}_{vectorizadores[ngrama]}_{vectorizadores[referencia]}.pkl"
 
     pubmed_csv_path = f"{root_path}/data/pubmed_raw_corpus.csv"
     arxiv_csv_path = f"{root_path}/data/arxiv_raw_corpus.csv"
@@ -155,7 +157,7 @@ def buscar_articulos(nombre_archivo, ngrama, vectorizacion, referencia):
 
     texto_normalizado = normalizar_texto(texto)
 
-    matriz_vectorizada = vectorizar_texto(texto_normalizado, ngrama, vectorizacion)
+    matriz_vectorizada = vectorizar_texto(texto_normalizado, ngrama, vectorizacion, referencia)
     if matriz_vectorizada is None:
         print("No se pudo vectorizar el texto.")
         return None, None
