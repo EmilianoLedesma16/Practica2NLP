@@ -3,8 +3,9 @@ from tkinter import messagebox
 import os
 import pandas as pd
 from modules.normalizacion_texto import procesar_corpus
-from modules.vectorizacion_arxiv import generar_y_guardar_vectorizacion
-from modules.vectorizacion_pubmed import generar_y_guardar_vectorizacion
+from modules.vectorizacion_arxiv import generar_y_guardar_vectorizacion as vectorizar_arxiv
+from modules.vectorizacion_pubmed import generar_y_guardar_vectorizacion as vectorizar_pubmed
+
 import pathlib
 
 def create_processing_tab(tabview):
@@ -49,6 +50,18 @@ def create_processing_tab(tabview):
             BASE_DIR = pathlib.Path(__file__).parent.parent.parent
             DATA_DIR = BASE_DIR / "Practica2NLP/data"
             PLK_DIR = DATA_DIR / "plks"
+            ruta_matrices_arxiv = os.path.join(PLK_DIR, "matrices", "arxiv")
+            ruta_matrices_pubmed = os.path.join(PLK_DIR, "matrices", "pubmed")
+            ruta_vectores_arxiv = os.path.join(PLK_DIR, "vectorizadores", "arxiv")
+            ruta_vectores_pubmed = os.path.join(PLK_DIR, "vectorizadores", "pubmed")
+
+            # Asegurar que las carpetas existen
+            os.makedirs(ruta_matrices_arxiv, exist_ok=True)
+            os.makedirs(ruta_matrices_pubmed, exist_ok=True)
+            os.makedirs(ruta_vectores_arxiv, exist_ok=True)
+            os.makedirs(ruta_vectores_pubmed, exist_ok=True)
+
+
 
             arxiv_clean = DATA_DIR / "arxiv_clean_corpus.csv"
             pubmed_clean = DATA_DIR / "pubmed_clean_corpus.csv"
@@ -56,25 +69,69 @@ def create_processing_tab(tabview):
             if not arxiv_clean.exists() or not pubmed_clean.exists():
                 messagebox.showerror("Error", "Archivos de texto normalizado no encontrados.")
                 return
+            
+            # Cargar los datos
+            df_arxiv = pd.read_csv(arxiv_clean, sep='\t', encoding='utf-8')
+            df_pubmed = pd.read_csv(pubmed_clean, sep='\t', encoding='utf-8')
 
-            # Cargar los textos correctamente antes de pasarlos a la función
-            df_arxiv = pd.read_csv(arxiv_clean, sep='\t', encoding='utf-8-sig')
-            textos_arxiv = df_arxiv['Cleaned_Text'].tolist()  # Asegurar que es una lista
-            df_pubmed = pd.read_csv(pubmed_clean, sep='\t', encoding='utf-8-sig')
-            textos_pubmed = df_pubmed['Cleaned_Text'].tolist()
+            print("Columnas arXiv:", df_arxiv.columns)
+            print("Columnas PubMed:", df_pubmed.columns)
 
-            # Verificar que los textos se cargaron bien
+
+            # Concatenacion de las columnas "Cleaned_Text" y "Cleaned_Abstract"
+            df_arxiv["Cleaned_Text"] = df_arxiv["Cleaned_Title"].fillna('') + " " + df_arxiv["Cleaned_Abstract"].fillna('')
+            df_pubmed["Cleaned_Text"] = df_pubmed["Cleaned_Title"].fillna('') + " " + df_pubmed["Cleaned_Abstract"].fillna('')
+            
+            # Convierte a listas para vectorizar
+            textos_arxiv = df_arxiv["Cleaned_Text"].tolist()
+            textos_pubmed = df_pubmed["Cleaned_Text"].tolist()
+
             print(f"Arxiv tiene {len(textos_arxiv)} documentos")
             print(f"PubMed tiene {len(textos_pubmed)} documentos")
 
-            # Llamar a la función con los textos en lugar de la ruta del archivo
+            # Definicion de diccionario con los nombres de los archivos resultantes
+            nombres_archivos_arxiv = {
+                'binario_uni_titulo': os.path.join(ruta_matrices_arxiv, 'arxiv_vector_binaria_uni_titulo.pkl'),
+                'binario_uni_abstract': os.path.join(ruta_matrices_arxiv, 'arxiv_vector_binaria_uni_abstract.pkl'),
+                'tf_uni_titulo': os.path.join(ruta_matrices_arxiv, 'arxiv_vector_tf_uni_titulo.pkl'),
+                'tf_uni_abstract': os.path.join(ruta_matrices_arxiv, 'arxiv_vector_tf_uni_abstract.pkl'),
+                'tfidf_uni_titulo': os.path.join(ruta_matrices_arxiv, 'arxiv_vector_tfidf_uni_titulo.pkl'),
+                'tfidf_uni_abstract': os.path.join(ruta_matrices_arxiv, 'arxiv_vector_tfidf_uni_abstract.pkl'),
+                'binario_bi_titulo': os.path.join(ruta_matrices_arxiv, 'arxiv_vector_binaria_bi_titulo.pkl'),
+                'binario_bi_abstract': os.path.join(ruta_matrices_arxiv, 'arxiv_vector_binaria_bi_abstract.pkl'),
+                'tf_bi_titulo': os.path.join(ruta_matrices_arxiv, 'arxiv_vector_tf_bi_titulo.pkl'),
+                'tf_bi_abstract': os.path.join(ruta_matrices_arxiv, 'arxiv_vector_tf_bi_abstract.pkl'),
+                'tfidf_bi_titulo': os.path.join(ruta_matrices_arxiv, 'arxiv_vector_tfidf_bi_titulo.pkl'),
+                'tfidf_bi_abstract': os.path.join(ruta_matrices_arxiv, 'arxiv_vector_tfidf_bi_abstract.pkl'),
+                
+                'binario_uni_vect_titulo' : os.path.join(ruta_vectores_arxiv, 'arxiv_vector_binaria_uni_vect_titulo.pkl'),
+                'binario_uni_vect_abstract' : os.path.join(ruta_vectores_arxiv, 'arxiv_vector_binaria_uni_vect_abstract.pkl'),
+                'tf_uni_vect_titulo' : os.path.join(ruta_vectores_arxiv, 'arxiv_vector_tf_uni_vect_titulo.pkl'),
+                'tf_uni_vect_abstract' : os.path.join(ruta_vectores_arxiv, 'arxiv_vector_tf_uni_vect_abstract.pkl'),
+                'tfidf_uni_vect_titulo' : os.path.join(ruta_vectores_arxiv, 'arxiv_vector_tfidf_uni_vect_titulo.pkl'),
+                'tfidf_uni_vect_abstract' : os.path.join(ruta_vectores_arxiv, 'arxiv_vector_tfidf_uni_vect_abstract.pkl'),
+                'binario_bi_vect_titulo' : os.path.join(ruta_vectores_arxiv, 'arxiv_vector_binaria_bi_vect_titulo.pkl'),
+                'binario_bi_vect_abstract' : os.path.join(ruta_vectores_arxiv, 'arxiv_vector_binaria_bi_vect_abstract.pkl'),
+                'tf_bi_vect_titulo' : os.path.join(ruta_vectores_arxiv, 'arxiv_vector_tf_bi_vect_titulo.pkl'),
+                'tf_bi_vect_abstract' : os.path.join(ruta_vectores_arxiv, 'arxiv_vector_tf_bi_vect_abstract.pkl'),
+                'tfidf_bi_vect_titulo' : os.path.join(ruta_vectores_arxiv, 'arxiv_vector_tfidf_bi_vect_titulo.pkl'),
+                'tfidf_bi_vect_abstract' : os.path.join(ruta_vectores_arxiv, 'arxiv_vector_tfidf_bi_vect_abstract.pkl')
+            }
             
-            generar_y_guardar_vectorizacion(textos_arxiv, str(PLK_DIR))
-            generar_y_guardar_vectorizacion(textos_pubmed, str(PLK_DIR))
+            nombres_archivos_pubmed = {
+                k.replace('arxiv', 'pubmed'): v.replace('arxiv', 'pubmed').replace('arxiv/', 'pubmed/')
+                for k, v in nombres_archivos_arxiv.items()
+            }
+
+            # Llamada correcta con los 3 argumentos
+            vectorizar_pubmed(textos_pubmed, textos_pubmed, nombres_archivos_pubmed)
+            vectorizar_arxiv(textos_arxiv, textos_arxiv, nombres_archivos_arxiv)
+
 
             messagebox.showinfo("Éxito", "Vectorización completada")
         except Exception as e:
             messagebox.showerror("Error", f"Error al vectorizar:\n{str(e)}")
+
 
     # Botones
     button_normalizar = ctk.CTkButton(
