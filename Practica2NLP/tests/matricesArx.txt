@@ -1,0 +1,418 @@
+Matriz binaria generada
+['00' '00 09' '000' '000 000' '000 answer' '000 base' '000 bp'
+ '000 challenging' '000 lidar' '000 multimodal' '000 persona' '000 pose'
+ '000 sample' '000 typewritten' '000 users' '0009' '0009 second' '004'
+ '004 128k' '01' '01 73' '01 pilot' '01 very' '03' '03 increase' '040'
+ '040 abstractive' '042' '042 old' '05' '05 epsilon' '06' '06 accuracy'
+ '07' '07 accuracy' '07 original' '08' '08 nuaa' '09' '09 average' '096'
+ '096 bp' '10' '10 000' '10 11' '10 31' '10 available' '10 benchmark'
+ '10 category' '10 compare' '10 fold' '10 framework' '10 geospatial'
+ '10 llms' '10 map' '10 participant' '10 sampling' '10 shot' '10 task'
+ '10 transformer' '100' '100 000' '100 attack' '100 compare'
+ '100 fictional' '100 team' '100 tinyimagenet' '1000' '1000 fps'
+ '1000 simulated' '100b' '100b token' '101' '101 be' '101 natural'
+ '101 yield' '105' '105 code' '10k' '10k 10k' '10k benchmark'
+ '10k emphasize' '10s' '10s error' '10x' '10x high' '11' '11 benchmark'
+ '11 different' '11 diverse' '11 judge' '11 language' '11 llm' '11 sota'
+ '11 state' '110' '110 response' '114' '114 surah' '12' '12 attacker'
+ '12 mean' '12 ms' '12 negative' '12 scale' '124' '124 object' '128k'
+ '128k case' '12k' '12k atomic' '12th' '12th place' '13' '13 35' '13 5x'
+ '13 70' '13 additionally' '13 diverse' '13 ms' '13 open' '13 publicly'
+ '14' '14 ms' '140k' '140k point' '144k' '144k image' '15' '15 exist'
+ '15 time' '150' '150 traffic' '16k' '16k vocabulary' '17' '17 06'
+ '17 124' '17 few' '17 legal' '17 point' '17 type' '18' '18 point'
+ '18 vlms' '18th' '18th 20th' '190' '190 250' '190k' '190k text' '192'
+ '192 000' '1b' '1b parameter' '1d' '1d 2d' '1d data' '1k'
+ '1k classification' '1k dataset' '20' '20 25' '20 accuracy' '20 bdc'
+ '20 despite' '20 experimental' '20 improvement' '20 inter' '200'
+ '200 000' '200x' '200x naive' '2015' '2015 2025' '2015 vot' '2016'
+ '2016 dataset' '2018' '2018 cohort' '2018 compare' '2018 lasot' '202'
+ '202 participant' '2021' '2021 cuban' '2022' '2022 clinical'
+ '2022 release' '2023' '2023 minerva' '2024' '2024 amc' '2024 dataset'
+ '2024 do' '2025' '2025 challenge' '2025 leverage' '2025 outline'
+ '2025 task' '2025 work' '2048x2048' '2048x2048 pixel' '20th'
+ '20th century' '21' '21 72' '21 930' '21 diverse' '21 llms' '21 specific'
+ '22' '22 525' '22 exist' '22 fast' '23' '23 10' '23 type' '24' '24 hour'
+ '24 improvement' '248k' '248k experiment' '25' '25 69' '25 improvement'
+ '25 reduction' '250' '250 solution' '256' '256 benchmark' '26' '26 model'
+ '276' '276 high' '27b' '27b qwq' '28' '28 dataset' '288' '288 diabetic'
+ '2b' '2b experimental' '2d' '2d 3d' '2d convolution' '2d feature'
+ '2d image' '2d inpainte' '2d line' '2d method' '2d motion' '2d multipart'
+ '2d only' '2d optical' '2d selective' '2d spatial' '2d token' '2d train'
+ '2d video' '2d wire' '2k' '2k diverse' '2s' '2s alongside' '2x'
+ '2x boost' '2x speedup' '30' '30 different' '30 improvement' '30 mae'
+ '30 participant' '30 token' '300' '300 object' '300m' '300m 3b' '31'
+ '31 also' '31 improvement' '31 prostate' '326' '326 backbone' '32b'
+ '32b medium' '32k' '32k context' '33' '33 doctor' '34' '34 distinct'
+ '341' '341 user' '34k' '34k 3d' '35' '35 03' '35 dof' '35 increase'
+ '35 interact' '35 make' '35 tnm' '36' '36 70' '36 diverse' '360'
+ '360 dataset' '37' '37 rmse' '375' '375 participant' '38' '38 db'
+ '38 rek' '39' '39 86' '39 few' '39k' '39k datum' '3b' '3b model'
+ '3b parameter' '3b phi3' '3d' '3d arise' '3d branch' '3d captioning'
+ '3d component' '3d content' '3d convolutional' '3d datum' '3d depth'
+ '3d environment' '3d estimation' '3d eye' '3d face' '3d facial'
+ '3d feature' '3d full' '3d game' '3d gaussian' '3d gaussians'
+ '3d geometric' '3d human' '3d idtm' '3d image' '3d indoor' '3d mesh'
+ '3d metric' '3d model' '3d net' '3d neural' '3d object' '3d od'
+ '3d output' '3d point' '3d reconstruction' '3d representation' '3d scan'
+ '3d scene' '3d self' '3d semantic' '3d shape' '3d skeleton' '3d space'
+ '3d spatial' '3d structural' '3d structure' '3d synthetic' '3d task'
+ '3d text' '3d vision' '3d volume' '3d wire' '3d world' '3d worlds' '40'
+ '40 condition' '40 minute' '40 surprisingly' '400' '400 temporally' '42'
+ '42 moreover' '42 training' '427' '427 set' '43' '43 94' '43 average'
+ '449' '449 page' '45' '45 good' '45k' '45k additional' '46' '46 surpass'
+ '47' '47 show' '48' '48 55' '48 77' '48 compare' '48 gb' '485'
+ '485 patient' '49' '49 furthermore' '4d' '4d gaussian' '4d radar'
+ '4d real' '4dradarcam' '4dradarcam view' '4k' '4k 8k' '4k face'
+ '4k image' '4o' '4o 28' '4o achieve' '4o adopt' '4o deepseek'
+ '4o examine' '4o gemini' '4o generate' '4o llama3' '4o mini' '4o model'
+ '4o phi' '4o token1' '4o well' '4th' '4th anti' '50' '50 additionally'
+ '50 compare' '50 faster' '50 frame' '50 independent' '50 training'
+ '50 visual' '500' '500 aime' '500 conversation' '5000' '5000 different'
+ '525' '525 news' '53' '53 hour' '54m' '54m only' '55' '55 53'
+ '55 consistent' '55 overall' '55 percent' '55 rek' '55 unauthorized' '56'
+ '56 67' '56 71' '58' '58 47' '58 difference' '58 explore' '59'
+ '59 standard' '5k' '5k 10k' '5w1h' '5w1h use' '5x' '5x acceleration' '60'
+ '60 arena' '60 input' '60 maintain' '600' '600 fps' '600 hour' '605'
+ '605 patient' '61' '61 surpass' '619' '619 relevance' '62' '62 harmful'
+ '63' '63 to' '64' '64 73' '65x' '65x baseline' '66' '66 improve']
+<Compressed Sparse Row sparse matrix of dtype 'int64'
+	with 69721 stored elements and shape (301, 36672)>
+  Coords	Values
+  (0, 7715)	1
+  (0, 7476)	1
+  (0, 11095)	1
+  (0, 19185)	1
+  (0, 26898)	1
+  (0, 31409)	1
+  (0, 21964)	1
+  (0, 18232)	1
+  (0, 29507)	1
+  (0, 7466)	1
+  (0, 4601)	1
+  (0, 18307)	1
+  (0, 20900)	1
+  (0, 19294)	1
+  (0, 23809)	1
+  (0, 6028)	1
+  (0, 32699)	1
+  (0, 27972)	1
+  (0, 21748)	1
+  (0, 31375)	1
+  (0, 19473)	1
+  (0, 8200)	1
+  (0, 27677)	1
+  (0, 30140)	1
+  (0, 4948)	1
+  :	:
+  (300, 19508)	1
+  (300, 30793)	1
+  (300, 26252)	1
+  (300, 31458)	1
+  (300, 19943)	1
+  (300, 1088)	1
+  (300, 14055)	1
+  (300, 6525)	1
+  (300, 13575)	1
+  (300, 6280)	1
+  (300, 27752)	1
+  (300, 5947)	1
+  (300, 35552)	1
+  (300, 33883)	1
+  (300, 986)	1
+  (300, 27246)	1
+  (300, 31447)	1
+  (300, 12745)	1
+  (300, 26706)	1
+  (300, 31094)	1
+  (300, 29195)	1
+  (300, 19698)	1
+  (300, 5898)	1
+  (300, 26342)	1
+  (300, 24563)	1
+[[0 0 0 ... 0 0 0]
+ [0 0 0 ... 0 0 0]
+ [0 0 0 ... 0 0 0]
+ ...
+ [0 0 0 ... 0 0 0]
+ [0 0 0 ... 0 0 0]
+ [0 0 0 ... 0 0 0]]
+Matriz tf generada
+['00' '00 09' '000' '000 000' '000 answer' '000 base' '000 bp'
+ '000 challenging' '000 lidar' '000 multimodal' '000 persona' '000 pose'
+ '000 sample' '000 typewritten' '000 users' '0009' '0009 second' '004'
+ '004 128k' '01' '01 73' '01 pilot' '01 very' '03' '03 increase' '040'
+ '040 abstractive' '042' '042 old' '05' '05 epsilon' '06' '06 accuracy'
+ '07' '07 accuracy' '07 original' '08' '08 nuaa' '09' '09 average' '096'
+ '096 bp' '10' '10 000' '10 11' '10 31' '10 available' '10 benchmark'
+ '10 category' '10 compare' '10 fold' '10 framework' '10 geospatial'
+ '10 llms' '10 map' '10 participant' '10 sampling' '10 shot' '10 task'
+ '10 transformer' '100' '100 000' '100 attack' '100 compare'
+ '100 fictional' '100 team' '100 tinyimagenet' '1000' '1000 fps'
+ '1000 simulated' '100b' '100b token' '101' '101 be' '101 natural'
+ '101 yield' '105' '105 code' '10k' '10k 10k' '10k benchmark'
+ '10k emphasize' '10s' '10s error' '10x' '10x high' '11' '11 benchmark'
+ '11 different' '11 diverse' '11 judge' '11 language' '11 llm' '11 sota'
+ '11 state' '110' '110 response' '114' '114 surah' '12' '12 attacker'
+ '12 mean' '12 ms' '12 negative' '12 scale' '124' '124 object' '128k'
+ '128k case' '12k' '12k atomic' '12th' '12th place' '13' '13 35' '13 5x'
+ '13 70' '13 additionally' '13 diverse' '13 ms' '13 open' '13 publicly'
+ '14' '14 ms' '140k' '140k point' '144k' '144k image' '15' '15 exist'
+ '15 time' '150' '150 traffic' '16k' '16k vocabulary' '17' '17 06'
+ '17 124' '17 few' '17 legal' '17 point' '17 type' '18' '18 point'
+ '18 vlms' '18th' '18th 20th' '190' '190 250' '190k' '190k text' '192'
+ '192 000' '1b' '1b parameter' '1d' '1d 2d' '1d data' '1k'
+ '1k classification' '1k dataset' '20' '20 25' '20 accuracy' '20 bdc'
+ '20 despite' '20 experimental' '20 improvement' '20 inter' '200'
+ '200 000' '200x' '200x naive' '2015' '2015 2025' '2015 vot' '2016'
+ '2016 dataset' '2018' '2018 cohort' '2018 compare' '2018 lasot' '202'
+ '202 participant' '2021' '2021 cuban' '2022' '2022 clinical'
+ '2022 release' '2023' '2023 minerva' '2024' '2024 amc' '2024 dataset'
+ '2024 do' '2025' '2025 challenge' '2025 leverage' '2025 outline'
+ '2025 task' '2025 work' '2048x2048' '2048x2048 pixel' '20th'
+ '20th century' '21' '21 72' '21 930' '21 diverse' '21 llms' '21 specific'
+ '22' '22 525' '22 exist' '22 fast' '23' '23 10' '23 type' '24' '24 hour'
+ '24 improvement' '248k' '248k experiment' '25' '25 69' '25 improvement'
+ '25 reduction' '250' '250 solution' '256' '256 benchmark' '26' '26 model'
+ '276' '276 high' '27b' '27b qwq' '28' '28 dataset' '288' '288 diabetic'
+ '2b' '2b experimental' '2d' '2d 3d' '2d convolution' '2d feature'
+ '2d image' '2d inpainte' '2d line' '2d method' '2d motion' '2d multipart'
+ '2d only' '2d optical' '2d selective' '2d spatial' '2d token' '2d train'
+ '2d video' '2d wire' '2k' '2k diverse' '2s' '2s alongside' '2x'
+ '2x boost' '2x speedup' '30' '30 different' '30 improvement' '30 mae'
+ '30 participant' '30 token' '300' '300 object' '300m' '300m 3b' '31'
+ '31 also' '31 improvement' '31 prostate' '326' '326 backbone' '32b'
+ '32b medium' '32k' '32k context' '33' '33 doctor' '34' '34 distinct'
+ '341' '341 user' '34k' '34k 3d' '35' '35 03' '35 dof' '35 increase'
+ '35 interact' '35 make' '35 tnm' '36' '36 70' '36 diverse' '360'
+ '360 dataset' '37' '37 rmse' '375' '375 participant' '38' '38 db'
+ '38 rek' '39' '39 86' '39 few' '39k' '39k datum' '3b' '3b model'
+ '3b parameter' '3b phi3' '3d' '3d arise' '3d branch' '3d captioning'
+ '3d component' '3d content' '3d convolutional' '3d datum' '3d depth'
+ '3d environment' '3d estimation' '3d eye' '3d face' '3d facial'
+ '3d feature' '3d full' '3d game' '3d gaussian' '3d gaussians'
+ '3d geometric' '3d human' '3d idtm' '3d image' '3d indoor' '3d mesh'
+ '3d metric' '3d model' '3d net' '3d neural' '3d object' '3d od'
+ '3d output' '3d point' '3d reconstruction' '3d representation' '3d scan'
+ '3d scene' '3d self' '3d semantic' '3d shape' '3d skeleton' '3d space'
+ '3d spatial' '3d structural' '3d structure' '3d synthetic' '3d task'
+ '3d text' '3d vision' '3d volume' '3d wire' '3d world' '3d worlds' '40'
+ '40 condition' '40 minute' '40 surprisingly' '400' '400 temporally' '42'
+ '42 moreover' '42 training' '427' '427 set' '43' '43 94' '43 average'
+ '449' '449 page' '45' '45 good' '45k' '45k additional' '46' '46 surpass'
+ '47' '47 show' '48' '48 55' '48 77' '48 compare' '48 gb' '485'
+ '485 patient' '49' '49 furthermore' '4d' '4d gaussian' '4d radar'
+ '4d real' '4dradarcam' '4dradarcam view' '4k' '4k 8k' '4k face'
+ '4k image' '4o' '4o 28' '4o achieve' '4o adopt' '4o deepseek'
+ '4o examine' '4o gemini' '4o generate' '4o llama3' '4o mini' '4o model'
+ '4o phi' '4o token1' '4o well' '4th' '4th anti' '50' '50 additionally'
+ '50 compare' '50 faster' '50 frame' '50 independent' '50 training'
+ '50 visual' '500' '500 aime' '500 conversation' '5000' '5000 different'
+ '525' '525 news' '53' '53 hour' '54m' '54m only' '55' '55 53'
+ '55 consistent' '55 overall' '55 percent' '55 rek' '55 unauthorized' '56'
+ '56 67' '56 71' '58' '58 47' '58 difference' '58 explore' '59'
+ '59 standard' '5k' '5k 10k' '5w1h' '5w1h use' '5x' '5x acceleration' '60'
+ '60 arena' '60 input' '60 maintain' '600' '600 fps' '600 hour' '605'
+ '605 patient' '61' '61 surpass' '619' '619 relevance' '62' '62 harmful'
+ '63' '63 to' '64' '64 73' '65x' '65x baseline' '66' '66 improve']
+<Compressed Sparse Row sparse matrix of dtype 'int64'
+	with 69721 stored elements and shape (301, 36672)>
+  Coords	Values
+  (0, 7715)	1
+  (0, 7476)	1
+  (0, 11095)	3
+  (0, 19185)	1
+  (0, 26898)	6
+  (0, 31409)	2
+  (0, 21964)	3
+  (0, 18232)	4
+  (0, 29507)	3
+  (0, 7466)	4
+  (0, 4601)	1
+  (0, 18307)	1
+  (0, 20900)	2
+  (0, 19294)	1
+  (0, 23809)	1
+  (0, 6028)	1
+  (0, 32699)	3
+  (0, 27972)	1
+  (0, 21748)	1
+  (0, 31375)	5
+  (0, 19473)	1
+  (0, 8200)	1
+  (0, 27677)	1
+  (0, 30140)	1
+  (0, 4948)	2
+  :	:
+  (300, 19508)	1
+  (300, 30793)	1
+  (300, 26252)	1
+  (300, 31458)	1
+  (300, 19943)	1
+  (300, 1088)	1
+  (300, 14055)	1
+  (300, 6525)	1
+  (300, 13575)	1
+  (300, 6280)	1
+  (300, 27752)	1
+  (300, 5947)	1
+  (300, 35552)	1
+  (300, 33883)	1
+  (300, 986)	1
+  (300, 27246)	1
+  (300, 31447)	1
+  (300, 12745)	1
+  (300, 26706)	1
+  (300, 31094)	1
+  (300, 29195)	1
+  (300, 19698)	1
+  (300, 5898)	1
+  (300, 26342)	1
+  (300, 24563)	1
+[[0 0 0 ... 0 0 0]
+ [0 0 0 ... 0 0 0]
+ [0 0 0 ... 0 0 0]
+ ...
+ [0 0 0 ... 0 0 0]
+ [0 0 0 ... 0 0 0]
+ [0 0 0 ... 0 0 0]]
+Matriz tf-idf generada
+['00' '00 09' '000' '000 000' '000 answer' '000 base' '000 bp'
+ '000 challenging' '000 lidar' '000 multimodal' '000 persona' '000 pose'
+ '000 sample' '000 typewritten' '000 users' '0009' '0009 second' '004'
+ '004 128k' '01' '01 73' '01 pilot' '01 very' '03' '03 increase' '040'
+ '040 abstractive' '042' '042 old' '05' '05 epsilon' '06' '06 accuracy'
+ '07' '07 accuracy' '07 original' '08' '08 nuaa' '09' '09 average' '096'
+ '096 bp' '10' '10 000' '10 11' '10 31' '10 available' '10 benchmark'
+ '10 category' '10 compare' '10 fold' '10 framework' '10 geospatial'
+ '10 llms' '10 map' '10 participant' '10 sampling' '10 shot' '10 task'
+ '10 transformer' '100' '100 000' '100 attack' '100 compare'
+ '100 fictional' '100 team' '100 tinyimagenet' '1000' '1000 fps'
+ '1000 simulated' '100b' '100b token' '101' '101 be' '101 natural'
+ '101 yield' '105' '105 code' '10k' '10k 10k' '10k benchmark'
+ '10k emphasize' '10s' '10s error' '10x' '10x high' '11' '11 benchmark'
+ '11 different' '11 diverse' '11 judge' '11 language' '11 llm' '11 sota'
+ '11 state' '110' '110 response' '114' '114 surah' '12' '12 attacker'
+ '12 mean' '12 ms' '12 negative' '12 scale' '124' '124 object' '128k'
+ '128k case' '12k' '12k atomic' '12th' '12th place' '13' '13 35' '13 5x'
+ '13 70' '13 additionally' '13 diverse' '13 ms' '13 open' '13 publicly'
+ '14' '14 ms' '140k' '140k point' '144k' '144k image' '15' '15 exist'
+ '15 time' '150' '150 traffic' '16k' '16k vocabulary' '17' '17 06'
+ '17 124' '17 few' '17 legal' '17 point' '17 type' '18' '18 point'
+ '18 vlms' '18th' '18th 20th' '190' '190 250' '190k' '190k text' '192'
+ '192 000' '1b' '1b parameter' '1d' '1d 2d' '1d data' '1k'
+ '1k classification' '1k dataset' '20' '20 25' '20 accuracy' '20 bdc'
+ '20 despite' '20 experimental' '20 improvement' '20 inter' '200'
+ '200 000' '200x' '200x naive' '2015' '2015 2025' '2015 vot' '2016'
+ '2016 dataset' '2018' '2018 cohort' '2018 compare' '2018 lasot' '202'
+ '202 participant' '2021' '2021 cuban' '2022' '2022 clinical'
+ '2022 release' '2023' '2023 minerva' '2024' '2024 amc' '2024 dataset'
+ '2024 do' '2025' '2025 challenge' '2025 leverage' '2025 outline'
+ '2025 task' '2025 work' '2048x2048' '2048x2048 pixel' '20th'
+ '20th century' '21' '21 72' '21 930' '21 diverse' '21 llms' '21 specific'
+ '22' '22 525' '22 exist' '22 fast' '23' '23 10' '23 type' '24' '24 hour'
+ '24 improvement' '248k' '248k experiment' '25' '25 69' '25 improvement'
+ '25 reduction' '250' '250 solution' '256' '256 benchmark' '26' '26 model'
+ '276' '276 high' '27b' '27b qwq' '28' '28 dataset' '288' '288 diabetic'
+ '2b' '2b experimental' '2d' '2d 3d' '2d convolution' '2d feature'
+ '2d image' '2d inpainte' '2d line' '2d method' '2d motion' '2d multipart'
+ '2d only' '2d optical' '2d selective' '2d spatial' '2d token' '2d train'
+ '2d video' '2d wire' '2k' '2k diverse' '2s' '2s alongside' '2x'
+ '2x boost' '2x speedup' '30' '30 different' '30 improvement' '30 mae'
+ '30 participant' '30 token' '300' '300 object' '300m' '300m 3b' '31'
+ '31 also' '31 improvement' '31 prostate' '326' '326 backbone' '32b'
+ '32b medium' '32k' '32k context' '33' '33 doctor' '34' '34 distinct'
+ '341' '341 user' '34k' '34k 3d' '35' '35 03' '35 dof' '35 increase'
+ '35 interact' '35 make' '35 tnm' '36' '36 70' '36 diverse' '360'
+ '360 dataset' '37' '37 rmse' '375' '375 participant' '38' '38 db'
+ '38 rek' '39' '39 86' '39 few' '39k' '39k datum' '3b' '3b model'
+ '3b parameter' '3b phi3' '3d' '3d arise' '3d branch' '3d captioning'
+ '3d component' '3d content' '3d convolutional' '3d datum' '3d depth'
+ '3d environment' '3d estimation' '3d eye' '3d face' '3d facial'
+ '3d feature' '3d full' '3d game' '3d gaussian' '3d gaussians'
+ '3d geometric' '3d human' '3d idtm' '3d image' '3d indoor' '3d mesh'
+ '3d metric' '3d model' '3d net' '3d neural' '3d object' '3d od'
+ '3d output' '3d point' '3d reconstruction' '3d representation' '3d scan'
+ '3d scene' '3d self' '3d semantic' '3d shape' '3d skeleton' '3d space'
+ '3d spatial' '3d structural' '3d structure' '3d synthetic' '3d task'
+ '3d text' '3d vision' '3d volume' '3d wire' '3d world' '3d worlds' '40'
+ '40 condition' '40 minute' '40 surprisingly' '400' '400 temporally' '42'
+ '42 moreover' '42 training' '427' '427 set' '43' '43 94' '43 average'
+ '449' '449 page' '45' '45 good' '45k' '45k additional' '46' '46 surpass'
+ '47' '47 show' '48' '48 55' '48 77' '48 compare' '48 gb' '485'
+ '485 patient' '49' '49 furthermore' '4d' '4d gaussian' '4d radar'
+ '4d real' '4dradarcam' '4dradarcam view' '4k' '4k 8k' '4k face'
+ '4k image' '4o' '4o 28' '4o achieve' '4o adopt' '4o deepseek'
+ '4o examine' '4o gemini' '4o generate' '4o llama3' '4o mini' '4o model'
+ '4o phi' '4o token1' '4o well' '4th' '4th anti' '50' '50 additionally'
+ '50 compare' '50 faster' '50 frame' '50 independent' '50 training'
+ '50 visual' '500' '500 aime' '500 conversation' '5000' '5000 different'
+ '525' '525 news' '53' '53 hour' '54m' '54m only' '55' '55 53'
+ '55 consistent' '55 overall' '55 percent' '55 rek' '55 unauthorized' '56'
+ '56 67' '56 71' '58' '58 47' '58 difference' '58 explore' '59'
+ '59 standard' '5k' '5k 10k' '5w1h' '5w1h use' '5x' '5x acceleration' '60'
+ '60 arena' '60 input' '60 maintain' '600' '600 fps' '600 hour' '605'
+ '605 patient' '61' '61 surpass' '619' '619 relevance' '62' '62 harmful'
+ '63' '63 to' '64' '64 73' '65x' '65x baseline' '66' '66 improve']
+<Compressed Sparse Row sparse matrix of dtype 'float64'
+	with 69721 stored elements and shape (301, 36672)>
+  Coords	Values
+  (0, 7715)	0.058178997357567416
+  (0, 7476)	0.062382549077217096
+  (0, 11095)	0.06308345221255283
+  (0, 19185)	0.024670841580520124
+  (0, 26898)	0.18202192898015007
+  (0, 31409)	0.11635799471513483
+  (0, 21964)	0.09725216475706472
+  (0, 18232)	0.07218139998125203
+  (0, 29507)	0.10292267557240706
+  (0, 7466)	0.21153259400330904
+  (0, 4601)	0.028213836532705226
+  (0, 18307)	0.018791516119273398
+  (0, 20900)	0.02481912273457444
+  (0, 19294)	0.02401028481305555
+  (0, 23809)	0.03158756675906687
+  (0, 6028)	0.029876146331941772
+  (0, 32699)	0.05545972645131345
+  (0, 27972)	0.02712153939561474
+  (0, 21748)	0.02695017625177775
+  (0, 31375)	0.17895559239358272
+  (0, 19473)	0.05519652994869615
+  (0, 8200)	0.062382549077217096
+  (0, 27677)	0.028407622252600497
+  (0, 30140)	0.025672594612292092
+  (0, 4948)	0.039871040534187586
+  :	:
+  (300, 19508)	0.05857076830073466
+  (300, 30793)	0.05857076830073466
+  (300, 26252)	0.05857076830073466
+  (300, 31458)	0.05857076830073466
+  (300, 19943)	0.05857076830073466
+  (300, 1088)	0.05857076830073466
+  (300, 14055)	0.05857076830073466
+  (300, 6525)	0.05857076830073466
+  (300, 13575)	0.05857076830073466
+  (300, 6280)	0.05857076830073466
+  (300, 27752)	0.05857076830073466
+  (300, 5947)	0.05857076830073466
+  (300, 35552)	0.05857076830073466
+  (300, 33883)	0.05857076830073466
+  (300, 986)	0.05857076830073466
+  (300, 27246)	0.05857076830073466
+  (300, 31447)	0.05857076830073466
+  (300, 12745)	0.05857076830073466
+  (300, 26706)	0.05857076830073466
+  (300, 31094)	0.05857076830073466
+  (300, 29195)	0.05857076830073466
+  (300, 19698)	0.05857076830073466
+  (300, 5898)	0.05857076830073466
+  (300, 26342)	0.05857076830073466
+  (300, 24563)	0.05857076830073466
+[[0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]
+ ...
+ [0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]]
+Archivos guardados correctamente
