@@ -1,7 +1,0 @@
-requests
-beautifulsoup4
-pandas
-spaCy
-scikit-learn
-customtkinter
-nltk
